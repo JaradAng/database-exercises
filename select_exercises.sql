@@ -52,3 +52,5 @@ select * from albums where sales < 20;
 -- All the albums with a genre of "Rock". Why do these query results not include albums with a genre of "Hard rock" or "Progressive rock"?
 select * from albums where genre = "Rock";
 -- id 15, 20, 23, 24, 30 - ?becuase "hard rock" is one string and is not breaking it up 
+
+select * from albums where genre like "%Rock%";
