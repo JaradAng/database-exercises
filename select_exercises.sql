@@ -25,6 +25,9 @@ show create table albums;
 select * from albums order by release_date asc;
 -- The beatles sgt peppers date 1967
 
+select min(release_date) from albums;
+select max(release_date) from albums;
+
 select * from albums order by release_date desc;
 -- Adele 21 date 2011
 
@@ -34,16 +37,19 @@ select * from albums where artist = "Pink Floyd";
 -- dark side of the moon and the wall
 
 -- The year Sgt. Pepper's Lonely Hearts Club Band was released
-select * from albums where name = "Sgt. Pepper's Lonely Hearts Club Band";
+select release_date from albums where name = "Sgt. Pepper's Lonely Hearts Club Band";
 -- 1967
 
 -- The genre for the album Nevermind
-select * from albums where name = "Nevermind";
+select genre from albums where name = "Nevermind";
 -- Grunge Alternative
 
 -- Which albums were released in the 1990s
-select * from albums where release_date > 1989 and release_date < 2000;
+select name from albums where release_date > 1989 and release_date < 2000;
 -- id 5,12,13,14.19,21,22,26,27,28,30
+-- alternate way
+select name from albums where release_date like '199%';
+
 
 -- Which albums had less than 20 million certified sales
 select * from albums where sales < 20;
