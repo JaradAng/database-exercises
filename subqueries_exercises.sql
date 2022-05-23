@@ -11,7 +11,7 @@ where to_date > now() and hire_date = (select hire_date
 from employees
 where emp_no = '101010')
 ;
--- 69 empoloyees hired on the same day
+-- 55 empoloyees hired on the same day
 
 
 -- Q2
