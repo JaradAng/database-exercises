@@ -19,16 +19,16 @@ select first_name
 from employees
 where first_name = 'aamod';
 
-select distinct title, first_name, last_name
+select distinct title -- first_name, last_name
 from titles
 join employees using (emp_no)
 join dept_emp as de using (emp_no)
 where de.to_date > now() and first_name in (select first_name
 from employees
-where first_name = 'aamod')
-order by last_name;
+where first_name = 'aamod');
+-- order by last_name;
 -- returned 248 rows
-
+-- originally had the names as well as titles updated the code to just have the distinct titles
 select *
 from dept_emp
 limit 5;
@@ -46,6 +46,11 @@ from employees as e
 join dept_emp as de using (emp_no)
 where de.to_date < curdate());
 -- 85108
+-- this pulled duplicate results
+
+select * from employees
+where emp_no not in(select emp_no from dept_emp where to_date > now());
+-- redid the code and came up with less results from the first time
 
 -- Q4
 select *
@@ -103,15 +108,20 @@ where to_date > now())
 and to_date > now();
 -- 83 have salary within 1 std of max
 
+select count(*)
+from salaries
+where to_date > now();
 
 select (select count(*)
 from salaries 
 where salary >= (select max(salary) - (std(salary)) 
 from salaries
 where to_date > now())
-and to_date > now()) / count(salary) * 100
+and to_date > now()) / (select count(*)
+from salaries
+where to_date > now()) * 100
 from salaries;
--- % = 0.0029% of employees within in std of top
+-- % = 0.0346% of employees within in std of top
 
 -- BONUS
  -- --------------------
